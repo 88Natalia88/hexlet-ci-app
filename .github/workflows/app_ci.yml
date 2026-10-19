@@ -1,6 +1,8 @@
 name: App CI
 
-on: [push, pull_request]
+on: 
+  - push
+  - pull_request
 
 jobs:
   build:
@@ -8,13 +10,10 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+ 
+      - run: make setup
 
-      - name: Run setup
-        run: make setup
+      - run: make lint
 
-      - name: Run linter
-        run: make lint
-
-      - name: Run tests
-        run: make test
+      - run: make test
